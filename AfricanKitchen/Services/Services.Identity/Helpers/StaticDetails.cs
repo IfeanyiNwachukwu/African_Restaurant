@@ -1,4 +1,5 @@
-﻿using Duende.IdentityServer.Models;
+﻿using Duende.IdentityServer;
+using Duende.IdentityServer.Models;
 
 namespace Services.Identity.Helpers
 {
@@ -19,7 +20,7 @@ namespace Services.Identity.Helpers
         public static IEnumerable<ApiScope> ApiScopes =>
             new List<ApiScope>
             { 
-                new ApiScope("AfricanKitchen", "AfricanKitchen Server"),
+                new ApiScope("africanKitchen", "AfricanKitchen Server"),
                 new ApiScope(name:"read", displayName:"Read your data."),
                 new ApiScope(name:"write", displayName:"Write your data."),
                 new ApiScope(name:"delete", displayName:"Delete your data."),
@@ -35,7 +36,22 @@ namespace Services.Identity.Helpers
                     ClientSecrets = {new Secret("secret".Sha256())},
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     AllowedScopes = {"read","write","profile"}
-                }
+                },
+                 new Client
+                {
+                    ClientId = "africankitchen",
+                    ClientSecrets = {new Secret("secret".Sha256())},
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RedirectUris={ "https://localhost:44322/signin-oidc" },
+                    PostLogoutRedirectUris={ "https://localhost:44322/signout-callback-oidc" },
+                    AllowedScopes = new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "mango"
+                    }
+                },
             };
             
 
