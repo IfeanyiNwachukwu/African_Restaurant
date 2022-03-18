@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{AC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.ProductAPI", "Services\Services.ProductAPI\Services.ProductAPI.csproj", "{C10BD70A-E90C-4DC9-9BDC-ECB2A7302EFF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AfricanChicken.Web", "FrontEnd\AfricanChicken.Web\AfricanChicken.Web.csproj", "{1653619C-7137-45E0-9DEE-851257CDCADF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,12 +21,17 @@ Global
 		{C10BD70A-E90C-4DC9-9BDC-ECB2A7302EFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C10BD70A-E90C-4DC9-9BDC-ECB2A7302EFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C10BD70A-E90C-4DC9-9BDC-ECB2A7302EFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1653619C-7137-45E0-9DEE-851257CDCADF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1653619C-7137-45E0-9DEE-851257CDCADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1653619C-7137-45E0-9DEE-851257CDCADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1653619C-7137-45E0-9DEE-851257CDCADF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C10BD70A-E90C-4DC9-9BDC-ECB2A7302EFF} = {AC83F4B3-2480-4073-B25B-7975D2D3D1D6}
+		{1653619C-7137-45E0-9DEE-851257CDCADF} = {32FBFB38-124D-409A-ABD9-CDF11CEB2717}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FC7A2F38-86EA-44B1-93C1-FA377C946700}
