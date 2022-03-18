@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{AC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.ProductAPI", "Services\Services.ProductAPI\Services.ProductAPI.csproj", "{C10BD70A-E90C-4DC9-9BDC-ECB2A7302EFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AfricanChicken.Web", "FrontEnd\AfricanChicken.Web\AfricanChicken.Web.csproj", "{1653619C-7137-45E0-9DEE-851257CDCADF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AfricanKitchen.Web", "FrontEnd\AfricanChicken.Web\AfricanKitchen.Web.csproj", "{1653619C-7137-45E0-9DEE-851257CDCADF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

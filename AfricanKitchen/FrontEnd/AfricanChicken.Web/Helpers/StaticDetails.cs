@@ -1,4 +1,4 @@
-﻿namespace AfricanChicken.Web.Helpers
+﻿namespace AfricanKitchen.Web.Helpers
 {
     public static class StaticDetails
     {

@@ -1,13 +1,13 @@
-﻿using AfricanChicken.Web.Helpers;
-using AfricanChicken.Web.Models;
-using AfricanChicken.Web.ServiceStore.IServices;
+﻿using AfricanKitchen.Web.Helpers;
+using AfricanKitchen.Web.Models;
+using AfricanKitchen.Web.ServiceStore.IServices;
 
-namespace AfricanChicken.Web.ServiceStore.Services
+namespace AfricanKitchen.Web.ServiceStore.Services
 {
     public class ProductService : BaseService, IProductService
     {
         private readonly IHttpClientFactory _clientFactory;
-        public ProductService(IHttpClientFactory clientFactory):base(clientFactory)
+        public ProductService(IHttpClientFactory clientFactory) : base(clientFactory)
         {
 
         }

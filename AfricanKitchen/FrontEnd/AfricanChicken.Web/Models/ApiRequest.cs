@@ -1,6 +1,6 @@
-﻿using static AfricanChicken.Web.Helpers.StaticDetails;
+﻿using static AfricanKitchen.Web.Helpers.StaticDetails;
 
-namespace AfricanChicken.Web.Models
+namespace AfricanKitchen.Web.Models
 {
     public class ApiRequest
     {

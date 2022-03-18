@@ -1,4 +1,4 @@
-﻿namespace AfricanChicken.Web.Models
+﻿namespace AfricanKitchen.Web.Models
 {
     public class ProductDTO
     {

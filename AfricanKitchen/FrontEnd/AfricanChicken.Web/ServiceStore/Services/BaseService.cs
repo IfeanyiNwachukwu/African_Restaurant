@@ -1,10 +1,10 @@
-﻿using AfricanChicken.Web.Helpers;
-using AfricanChicken.Web.Models;
-using AfricanChicken.Web.ServiceStore.IServices;
+﻿using AfricanKitchen.Web.Helpers;
+using AfricanKitchen.Web.Models;
+using AfricanKitchen.Web.ServiceStore.IServices;
 using Newtonsoft.Json;
 using System.Text;
 
-namespace AfricanChicken.Web.ServiceStore.Services
+namespace AfricanKitchen.Web.ServiceStore.Services
 {
     public class BaseService : IBaseService
     {

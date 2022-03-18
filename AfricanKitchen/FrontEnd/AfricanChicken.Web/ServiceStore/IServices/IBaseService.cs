@@ -1,6 +1,6 @@
-﻿using AfricanChicken.Web.Models;
+﻿using AfricanKitchen.Web.Models;
 
-namespace AfricanChicken.Web.ServiceStore.IServices
+namespace AfricanKitchen.Web.ServiceStore.IServices
 {
     public interface IBaseService : IDisposable
     {
