@@ -1,6 +1,66 @@
-﻿namespace AfricanChicken.Web.ServiceStore.Services
+﻿using AfricanChicken.Web.Helpers;
+using AfricanChicken.Web.Models;
+using AfricanChicken.Web.ServiceStore.IServices;
+
+namespace AfricanChicken.Web.ServiceStore.Services
 {
-    public class ProductService
+    public class ProductService : BaseService, IProductService
     {
+        private readonly IHttpClientFactory _clientFactory;
+        public ProductService(IHttpClientFactory clientFactory):base(clientFactory)
+        {
+
+        }
+        public async Task<T> CreateProductAsync<T>(ProductDTO model)
+        {
+            return await SendAsync<T>(new ApiRequest()
+            {
+                ApiType = StaticDetails.ApiType.POST,
+                Data = model,
+                Url = StaticDetails.ProductAPIBase + "/api/products",
+                AccessToken = ""
+            });
+        }
+
+        public async Task<T> DeleteProductAsync<T>(int id)
+        {
+            return await SendAsync<T>(new ApiRequest()
+            {
+                ApiType = StaticDetails.ApiType.DELETE,
+                Url = StaticDetails.ProductAPIBase + "/api/products/" + id,
+                AccessToken = ""
+            });
+        }
+
+        public async Task<T> GetAllProductsAsync<T>()
+        {
+            return await SendAsync<T>(new ApiRequest()
+            {
+                ApiType = StaticDetails.ApiType.GET,
+                Url = StaticDetails.ProductAPIBase + "/api/products",
+                AccessToken = ""
+            });
+        }
+
+        public async Task<T> GetProductsByIdAsync<T>(int id)
+        {
+            return await SendAsync<T>(new ApiRequest()
+            {
+                ApiType = StaticDetails.ApiType.GET,
+                Url = StaticDetails.ProductAPIBase + $"/api/products/{id}",
+                AccessToken = ""
+            });
+        }
+
+        public async Task<T> UpdateProductAsync<T>(ProductDTO model)
+        {
+            return await SendAsync<T>(new ApiRequest()
+            {
+                ApiType = StaticDetails.ApiType.PUT,
+                Data = model ?? null,
+                Url = StaticDetails.ProductAPIBase + "/api/products",
+                AccessToken = ""
+            });
+        }
     }
 }

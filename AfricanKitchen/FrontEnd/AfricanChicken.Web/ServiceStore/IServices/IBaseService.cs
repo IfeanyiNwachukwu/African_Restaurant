@@ -2,7 +2,7 @@
 
 namespace AfricanChicken.Web.ServiceStore.IServices
 {
-    public interface IBaseService
+    public interface IBaseService : IDisposable
     {
         ResponseDTO responseModel { get; set; }
         Task<T> SendAsync<T>(ApiRequest apiRequest);
