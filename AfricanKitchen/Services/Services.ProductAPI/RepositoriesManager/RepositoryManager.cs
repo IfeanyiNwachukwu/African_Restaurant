@@ -21,7 +21,7 @@ namespace Services.ProductAPI.RepositoriesManager
             {
                 if( _productRepository == null)
                 {
-                    _productRepository =  new ProductRepository(_repositoryContext)
+                    _productRepository = new ProductRepository(_repositoryContext);
                 }
                 return _productRepository;
             }
