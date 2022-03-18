@@ -1,4 +1,6 @@
-﻿namespace AfricanChicken.Web.Models
+﻿using static AfricanChicken.Web.Helpers.StaticDetails;
+
+namespace AfricanChicken.Web.Models
 {
     public class ApiRequest
     {
