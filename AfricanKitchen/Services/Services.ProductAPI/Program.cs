@@ -11,6 +11,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.ConfigureRepositoryManager();
+builder.Services.ConfigureAuthentication();
+builder.Services.ConfigureAuthorization();
+builder.Services.ConfigureSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

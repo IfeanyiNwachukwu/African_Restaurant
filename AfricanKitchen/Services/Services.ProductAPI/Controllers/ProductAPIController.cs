@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.ProductAPI.Contracts.IRepositoryManager;
 using Services.ProductAPI.DataTransferObjects.Readable;
@@ -21,7 +22,9 @@ namespace Services.ProductAPI.Controllers
             this._response = new ResponseDTO();
         }
 
+        
         [HttpGet]
+        [Authorize]
         public async Task<object> Get()
         {
             try
@@ -40,6 +43,7 @@ namespace Services.ProductAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("{id}")]
         public async Task<object> Get(int id)
         {
@@ -59,6 +63,7 @@ namespace Services.ProductAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<object> Post([FromBody] ProductDTO model)
         {
             try
@@ -79,6 +84,7 @@ namespace Services.ProductAPI.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<object> Put([FromBody] ProductDTO model)
         {
             try
@@ -98,7 +104,9 @@ namespace Services.ProductAPI.Controllers
             return _response;
         }
 
+       
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         [Route("{id}")]
         public async Task<object> Delete(int Id)
         {

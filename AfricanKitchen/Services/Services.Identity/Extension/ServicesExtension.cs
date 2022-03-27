@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Services.Identity.DbContexts;
 using Services.Identity.Helpers;
+using Services.Identity.Initializer.Contracts;
 using Services.Identity.Models;
 
 namespace Services.Identity.Extension
@@ -34,7 +35,8 @@ namespace Services.Identity.Extension
         
 
         }
-    
-    
+
+     
+
     }
 }
