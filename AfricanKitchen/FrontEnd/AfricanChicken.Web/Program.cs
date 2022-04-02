@@ -1,3 +1,4 @@
+using AfricanKitchen.Web.Extensions;
 using AfricanKitchen.Web.Helpers;
 using AfricanKitchen.Web.ServiceStore.IServices;
 using AfricanKitchen.Web.ServiceStore.Services;
@@ -12,6 +13,7 @@ builder.Services.AddHttpClient<IProductService, ProductService>();
 StaticDetails.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddControllersWithViews();
+builder.Services.ConfigureAuthentication(builder.Configuration);
 
 var app = builder.Build();
 
@@ -28,7 +30,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

@@ -49,7 +49,7 @@ namespace Services.Identity.Helpers
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email,
-                        "mango"
+                        "africankitchen"
                     }
                 },
             };
