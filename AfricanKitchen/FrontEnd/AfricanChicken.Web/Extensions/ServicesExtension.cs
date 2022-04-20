@@ -1,4 +1,6 @@
-﻿namespace AfricanKitchen.Web.Extensions
+﻿using Microsoft.AspNetCore.Authentication;
+
+namespace AfricanKitchen.Web.Extensions
 {
     public static class ServicesExtension
     {
@@ -14,10 +16,11 @@
             {
                 options.Authority = configuration["ServiceUrls:IdentityAPI"];
                 options.GetClaimsFromUserInfoEndpoint = true;
-                options.ClientId = "africankitchen";
+                options.ClientId = "africanKitchen";
                 options.ClientSecret = "secret";
                 options.ResponseType = "code";
-
+                options.ClaimActions.MapJsonKey("role", "role", "role");
+                options.ClaimActions.MapJsonKey("sub", "sub", "sub");
                 options.TokenValidationParameters.NameClaimType = "name";
                 options.TokenValidationParameters.RoleClaimType = "role";
                 options.Scope.Add("africanKitchen");

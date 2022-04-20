@@ -7,16 +7,16 @@ namespace Services.Identity.Helpers
     {
         public const string Admin = "Admin";
         public const string Customer = "Customer";
-
+        // IdentityResource is the resource we want to protect
         public static IEnumerable<IdentityResource> IdentityResources =>
             new List<IdentityResource>
             {
                 new IdentityResources.OpenId(), //Initializes a new instance of OpenId
-                new IdentityResources.Email(),
+                new IdentityResources.Email(),  
                 new IdentityResources.Profile()
 
             };
-
+        // Scopes are identifiers for the resource that the client wants to access
         public static IEnumerable<ApiScope> ApiScopes =>
             new List<ApiScope>
             { 
@@ -27,6 +27,9 @@ namespace Services.Identity.Helpers
 
             };
 
+        /// <summary>
+        /// client is a piece of software that request a token from identity server
+        /// </summary>
         public static IEnumerable<Client> Clients =>
             new List<Client>
             {
@@ -39,17 +42,17 @@ namespace Services.Identity.Helpers
                 },
                  new Client
                 {
-                    ClientId = "africankitchen",
+                    ClientId = "africanKitchen",
                     ClientSecrets = {new Secret("secret".Sha256())},
                     AllowedGrantTypes = GrantTypes.Code,
                     RedirectUris={ "https://localhost:44322/signin-oidc" },
-                    PostLogoutRedirectUris={ "https://localhost:44322/signout-callback-oidc" },
+                    PostLogoutRedirectUris={"https://localhost:44322/signout-callback-oidc" },
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email,
-                        "africankitchen"
+                        "africanKitchen"
                     }
                 },
             };

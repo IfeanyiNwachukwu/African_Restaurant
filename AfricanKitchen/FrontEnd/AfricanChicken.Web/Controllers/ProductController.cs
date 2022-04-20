@@ -1,5 +1,7 @@
 ﻿using AfricanKitchen.Web.Models;
 using AfricanKitchen.Web.ServiceStore.IServices;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -15,8 +17,8 @@ namespace AfricanKitchen.Web.Controllers
         public async Task<IActionResult> ProductIndex()
         {
             List<ProductDTO> products = new();
-
-            var response = await _productService.GetAllProductsAsync<ResponseDTO>();
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _productService.GetAllProductsAsync<ResponseDTO>(accessToken);
             if (response != null && response.IsSuccess)
             {
                 products = JsonConvert.DeserializeObject<List<ProductDTO>>(Convert.ToString(response.Result));
@@ -26,16 +28,18 @@ namespace AfricanKitchen.Web.Controllers
 
         public async Task<IActionResult> ProductCreate()
         {
+
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+       
         public async Task<IActionResult> ProductCreate(ProductDTO model)
         {
             if (ModelState.IsValid)
             {
-
-                var response = await _productService.CreateProductAsync<ResponseDTO>(model);
+                var accessToken = await HttpContext.GetTokenAsync("access_token");
+                var response = await _productService.CreateProductAsync<ResponseDTO>(model,accessToken);
                 if (response != null && response.IsSuccess)
                 {
                     return RedirectToAction(nameof(ProductIndex));
@@ -45,8 +49,8 @@ namespace AfricanKitchen.Web.Controllers
         }
         public async Task<IActionResult> ProductEdit(int productId)
         {
-
-            var response = await _productService.GetProductsByIdAsync<ResponseDTO>(productId);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _productService.GetProductsByIdAsync<ResponseDTO>(productId,accessToken);
             if (response != null && response.IsSuccess)
             {
                 ProductDTO model = JsonConvert.DeserializeObject<ProductDTO>(Convert.ToString(response.Result));
@@ -60,8 +64,8 @@ namespace AfricanKitchen.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                var response = await _productService.UpdateProductAsync<ResponseDTO>(model);
+                var accessToken = await HttpContext.GetTokenAsync("access_token");
+                var response = await _productService.UpdateProductAsync<ResponseDTO>(model,accessToken);
                 if (response != null && response.IsSuccess)
                 {
                     return RedirectToAction(nameof(ProductIndex));
@@ -70,10 +74,11 @@ namespace AfricanKitchen.Web.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ProductDelete(int productId)
         {
-
-            var response = await _productService.GetProductsByIdAsync<ResponseDTO>(productId);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _productService.GetProductsByIdAsync<ResponseDTO>(productId,accessToken);
             if (response != null && response.IsSuccess)
             {
                 ProductDTO model = JsonConvert.DeserializeObject<ProductDTO>(Convert.ToString(response.Result));
@@ -81,14 +86,17 @@ namespace AfricanKitchen.Web.Controllers
             }
             return NotFound();
         }
+
+        
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ProductDelete(ProductDTO model)
         {
             if (ModelState.IsValid)
             {
-
-                var response = await _productService.DeleteProductAsync<ResponseDTO>(model.ProductId);
+                var accessToken = await HttpContext.GetTokenAsync("access_token");
+                var response = await _productService.DeleteProductAsync<ResponseDTO>(model.ProductId,accessToken);
                 if (response != null && response.IsSuccess)
                 {
                     return RedirectToAction(nameof(ProductIndex));

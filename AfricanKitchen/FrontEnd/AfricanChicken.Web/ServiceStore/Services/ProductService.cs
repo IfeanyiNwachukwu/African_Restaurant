@@ -11,55 +11,55 @@ namespace AfricanKitchen.Web.ServiceStore.Services
         {
 
         }
-        public async Task<T> CreateProductAsync<T>(ProductDTO model)
+        public async Task<T> CreateProductAsync<T>(ProductDTO model,string token)
         {
             return await SendAsync<T>(new ApiRequest()
             {
                 ApiType = StaticDetails.ApiType.POST,
                 Data = model,
                 Url = StaticDetails.ProductAPIBase + "/api/products",
-                AccessToken = ""
+                AccessToken = token
             });
         }
 
-        public async Task<T> DeleteProductAsync<T>(int id)
+        public async Task<T> DeleteProductAsync<T>(int id, string token)
         {
             return await SendAsync<T>(new ApiRequest()
             {
                 ApiType = StaticDetails.ApiType.DELETE,
-                Url = StaticDetails.ProductAPIBase + "/api/products/" + id,
-                AccessToken = ""
+                Url = StaticDetails.ProductAPIBase + $"/api/products/{id}",
+                AccessToken = token
             });
         }
 
-        public async Task<T> GetAllProductsAsync<T>()
+        public async Task<T> GetAllProductsAsync<T>(string token)
         {
             return await SendAsync<T>(new ApiRequest()
             {
                 ApiType = StaticDetails.ApiType.GET,
                 Url = StaticDetails.ProductAPIBase + "/api/products",
-                AccessToken = ""
+                AccessToken = token
             });
         }
 
-        public async Task<T> GetProductsByIdAsync<T>(int id)
+        public async Task<T> GetProductsByIdAsync<T>(int id, string token)
         {
             return await SendAsync<T>(new ApiRequest()
             {
                 ApiType = StaticDetails.ApiType.GET,
                 Url = StaticDetails.ProductAPIBase + $"/api/products/{id}",
-                AccessToken = ""
+                AccessToken = token
             });
         }
 
-        public async Task<T> UpdateProductAsync<T>(ProductDTO model)
+        public async Task<T> UpdateProductAsync<T>(ProductDTO model, string token)
         {
             return await SendAsync<T>(new ApiRequest()
             {
                 ApiType = StaticDetails.ApiType.PUT,
                 Data = model ?? null,
                 Url = StaticDetails.ProductAPIBase + "/api/products",
-                AccessToken = ""
+                AccessToken = token
             });
         }
     }
