@@ -30,6 +30,18 @@ namespace AfricanKitchen.Web.Controllers
             return View(productList);
         }
 
+        [Authorize]
+        public async Task<IActionResult> Details(int productId)
+        {
+            ProductDTO product = new();
+            var response = await _productService.GetProductsByIdAsync<ResponseDTO>(productId,"");
+            if (response != null && response.IsSuccess)
+            {
+                product = JsonConvert.DeserializeObject<ProductDTO>(Convert.ToString(response.Result));
+            }
+            return View(product);
+        }
+
         public IActionResult Privacy()
         {
             return View();
