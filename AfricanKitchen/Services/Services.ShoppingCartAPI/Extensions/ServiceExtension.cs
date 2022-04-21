@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Services.ShoppingCartAPI.Contracts.IRepositoryManager;
 using Services.ShoppingCartAPI.DbContexts;
+using Services.ShoppingCartAPI.RepositoriesManager;
 
 namespace Services.ShoppingCartAPI.Extensions
 {
@@ -37,7 +39,7 @@ namespace Services.ShoppingCartAPI.Extensions
         public static void ConfigureSwaggerGen(this IServiceCollection services) =>
              services.AddSwaggerGen(c =>
              {
-                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AfricanKitchen.Services.ProductAPI", Version = "v1" });
+                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AfricanKitchen.Services.ShoppingCartAPI", Version = "v1" });
                  c.EnableAnnotations();
                  c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                  {

@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Services.ProductAPI.Contracts.IRepositoryManager.ProductRepositoryStore;
-using Services.ProductAPI.DbContexts;
-using Services.ProductAPI.Models;
+using Services.ShoppingCartAPI.Contracts.IRepositoryManager.ShoppingCartRepositoryStore;
+using Services.ShoppingCartAPI.DbContexts;
+using Services.ShoppingCartAPI.Models;
 
-namespace Services.ProductAPI.RepositoriesManager.ProductRepositoryStore
+namespace Services.ShoppingCartAPI.RepositoriesManager.ShoppingCartRepositoryStore
 {
     public class ProductRepository : RepositoryBase<Product>, IProductRepository
     {
@@ -12,7 +12,6 @@ namespace Services.ProductAPI.RepositoriesManager.ProductRepositoryStore
         {
 
         }
-      
         public void CreateUpdateProduct([FromBody] Product product)
         {
             if (product.ProductId > 0)

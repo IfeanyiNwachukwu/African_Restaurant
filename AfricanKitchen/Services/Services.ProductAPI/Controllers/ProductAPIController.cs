@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.ProductAPI.Contracts.IRepositoryManager;
 using Services.ProductAPI.DataTransferObjects.Readable;
+using Services.ProductAPI.DataTransferObjects.Writable;
 using Services.ProductAPI.Helpers;
 using Services.ProductAPI.Models;
 

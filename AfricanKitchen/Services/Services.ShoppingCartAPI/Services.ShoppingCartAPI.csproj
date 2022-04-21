@@ -26,13 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Contracts\IRepositoryManager\ShoppingCartRepositoryStore\" />
     <Folder Include="Controllers\" />
-    <Folder Include="DataTransferObjects\Writable\" />
-    <Folder Include="DataTransferObjects\Readable\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="Models\" />
-    <Folder Include="RepositoriesManager\ShoppingCartRepositoryStore\" />
   </ItemGroup>
 
 </Project>
