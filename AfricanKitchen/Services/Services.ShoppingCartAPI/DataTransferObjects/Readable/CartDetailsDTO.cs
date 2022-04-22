@@ -12,3 +12,5 @@ namespace Services.ShoppingCartAPI.DataTransferObjects.Readable
         public int Count { get; set; }
     }
 }
+
+

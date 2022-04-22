@@ -8,14 +8,10 @@ namespace Services.ShoppingCartAPI.Helpers
     {
         public MappingProfile()
         {
-            CreateMap<ProductDTO, Product>().ReverseMap();  // Source Destination
-            CreateMap<CartDTO, Cart>().ReverseMap();
-            CreateMap<CartHeaderDTO, CartHeader>().ReverseMap();
-            CreateMap<CartDetailsDTO, CartDetails>().ReverseMap();
-
+            CreateMap<ProductDTO, Product>().ReverseMap();
             CreateMap<CartHeader, CartHeaderDTO>().ReverseMap();
             CreateMap<CartDetails, CartDetailsDTO>().ReverseMap();
-            CreateMap<Cart,CartDTO>().ReverseMap();
+            CreateMap<Cart, CartDTO>().ReverseMap();
 
         }
     }

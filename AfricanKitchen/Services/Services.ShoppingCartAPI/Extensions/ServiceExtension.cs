@@ -12,9 +12,6 @@ namespace Services.ShoppingCartAPI.Extensions
         public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
          services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-        public static void ConfigureRepositoryManager(this IServiceCollection services) =>
-          services.AddScoped<IRepositoryManager, RepositoryManager>();
-
         public static void ConfigureAuthentication(this IServiceCollection services) =>
             services.AddAuthentication("Bearer")
             .AddJwtBearer("Bearer", options =>
