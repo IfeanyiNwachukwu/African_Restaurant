@@ -1,4 +1,6 @@
+using Services.ShoppingCartAPI.Contracts.IRepositoryManager.ShoppingCartRepositoryStore;
 using Services.ShoppingCartAPI.Extensions;
+using Services.ShoppingCartAPI.RepositoriesManager.ShoppingCartRepositoryStore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddScoped<ICartRepository, CartRepository>();
 
 var app = builder.Build();
 
