@@ -11,7 +11,7 @@ namespace Services.ShoppingCartAPI.Controllers
         private readonly ICartRepository _cartRepository;
         protected ResponseDTO _response;
 
-        public CartController(ICartRepository cartRepository,ResponseDTO response)
+        public CartController(ICartRepository cartRepository)
         {
             _cartRepository = cartRepository;
             _response = new ResponseDTO();

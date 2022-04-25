@@ -12,11 +12,13 @@ namespace AfricanKitchen.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProductService _productService;
+        private readonly ICartService _cartService;
 
-        public HomeController(ILogger<HomeController> logger,IProductService productService)
+        public HomeController(ILogger<HomeController> logger,IProductService productService,ICartService cartService)
         {
             _logger = logger;
             _productService = productService;
+            _cartService = cartService;
         }
 
         public async Task<IActionResult> Index()
@@ -41,6 +43,43 @@ namespace AfricanKitchen.Web.Controllers
             }
             return View(product);
         }
+        [HttpPost]
+        [Authorize]
+        [ActionName("Details")]
+        public async Task<IActionResult> DetailsPost(ProductDTO productDTO)
+        {
+            CartDTO cartDTO = new()
+            {
+                CartHeader = new CartHeaderDTO()
+                {
+                    UserId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value
+                }
+            };
+            CartDetailsDTO cartDetails = new CartDetailsDTO()
+            {
+                Count = productDTO.Count,
+                ProductId = productDTO.ProductId
+            };
+            var response = await _productService.GetProductsByIdAsync<ResponseDTO>(productDTO.ProductId, "");
+            
+            if(response != null && response.IsSuccess)
+            {
+                cartDetails.Product = JsonConvert.DeserializeObject<ProductDTO>(Convert.ToString(response.Result));
+            }
+            List<CartDetailsDTO> cartDetailsDTOs = new();
+            cartDetailsDTOs.Add(cartDetails);
+            cartDTO.CartDetails = cartDetailsDTOs;
+
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+
+            var addToCartResponse = await _cartService.AddToCartAsync<ResponseDTO>(cartDTO, accessToken);
+            if (addToCartResponse != null && addToCartResponse.IsSuccess)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(productDTO);
+        }
 
         public IActionResult Privacy()
         {
@@ -61,5 +100,6 @@ namespace AfricanKitchen.Web.Controllers
         {
             return SignOut("Cookies", "oidc");
         }
+       
     }
 }

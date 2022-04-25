@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Services.ShoppingCartAPI.Contracts.IRepositoryManager;
 using Services.ShoppingCartAPI.DbContexts;
-using Services.ShoppingCartAPI.RepositoriesManager;
 
 namespace Services.ShoppingCartAPI.Extensions
 {
