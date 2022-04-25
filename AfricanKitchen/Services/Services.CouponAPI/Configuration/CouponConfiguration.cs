@@ -29,19 +29,19 @@ namespace Services.CouponAPI.Configuration
                  },
                  new Coupon
                  {
-                     CouponId = 3,
+                     CouponId = 4,
                      CouponCode = "20OFF",
                      DiscountAmount = 20
                   },
                  new Coupon
                  {
-                    CouponId = 4,
+                    CouponId = 5,
                     CouponCode = "22OFF",
                     DiscountAmount = 22
                  },
                  new Coupon
                  {
-                    CouponId = 5,
+                    CouponId = 6,
                     CouponCode = "23OFF",
                     DiscountAmount = 23
                   }

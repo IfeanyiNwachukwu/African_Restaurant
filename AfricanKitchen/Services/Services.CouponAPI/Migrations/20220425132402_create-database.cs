@@ -4,7 +4,7 @@
 
 namespace Services.CouponAPI.Migrations
 {
-    public partial class CreateDatabase : Migration
+    public partial class createdatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,6 +20,19 @@ namespace Services.CouponAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Coupons", x => x.CouponId);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Coupons",
+                columns: new[] { "CouponId", "CouponCode", "DiscountAmount" },
+                values: new object[,]
+                {
+                    { 1, "10OFF", 10.0 },
+                    { 2, "10OFF", 15.0 },
+                    { 3, "20OFF", 20.0 },
+                    { 4, "20OFF", 20.0 },
+                    { 5, "22OFF", 22.0 },
+                    { 6, "23OFF", 23.0 }
                 });
         }
 

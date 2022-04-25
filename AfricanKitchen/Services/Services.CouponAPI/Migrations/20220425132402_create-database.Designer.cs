@@ -11,8 +11,8 @@ using Services.CouponAPI.DbContexts;
 namespace Services.CouponAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220425123955_CreateDatabase")]
-    partial class CreateDatabase
+    [Migration("20220425132402_create-database")]
+    partial class createdatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,6 +40,44 @@ namespace Services.CouponAPI.Migrations
                     b.HasKey("CouponId");
 
                     b.ToTable("Coupons");
+
+                    b.HasData(
+                        new
+                        {
+                            CouponId = 1,
+                            CouponCode = "10OFF",
+                            DiscountAmount = 10.0
+                        },
+                        new
+                        {
+                            CouponId = 2,
+                            CouponCode = "10OFF",
+                            DiscountAmount = 15.0
+                        },
+                        new
+                        {
+                            CouponId = 3,
+                            CouponCode = "20OFF",
+                            DiscountAmount = 20.0
+                        },
+                        new
+                        {
+                            CouponId = 4,
+                            CouponCode = "20OFF",
+                            DiscountAmount = 20.0
+                        },
+                        new
+                        {
+                            CouponId = 5,
+                            CouponCode = "22OFF",
+                            DiscountAmount = 22.0
+                        },
+                        new
+                        {
+                            CouponId = 6,
+                            CouponCode = "23OFF",
+                            DiscountAmount = 23.0
+                        });
                 });
 #pragma warning restore 612, 618
         }
