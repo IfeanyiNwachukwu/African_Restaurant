@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
@@ -28,11 +28,7 @@
   <ItemGroup>
     <Folder Include="Contracts\CouponRepositoryStore\" />
     <Folder Include="Controllers\" />
-    <Folder Include="DTOs\" />
     <Folder Include="Fulfilment\CouponRepositoryStore\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="Models\" />
-    <Folder Include="Extensions\" />
   </ItemGroup>
 
 </Project>

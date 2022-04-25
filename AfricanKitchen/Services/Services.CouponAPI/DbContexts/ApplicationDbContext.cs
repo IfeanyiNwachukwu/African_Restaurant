@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Services.CouponAPI.Models;
 
 namespace Services.CouponAPI.DbContexts
 {
@@ -8,5 +9,6 @@ namespace Services.CouponAPI.DbContexts
         {
 
         }
+        public DbSet<Coupon> Coupons { get; set; }
     }
 }
