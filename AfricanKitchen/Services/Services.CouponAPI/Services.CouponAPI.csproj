@@ -28,7 +28,6 @@
   <ItemGroup>
     <Folder Include="Contracts\CouponRepositoryStore\" />
     <Folder Include="Controllers\" />
-    <Folder Include="DbContexts\" />
     <Folder Include="DTOs\" />
     <Folder Include="Fulfilment\CouponRepositoryStore\" />
     <Folder Include="Helpers\" />
