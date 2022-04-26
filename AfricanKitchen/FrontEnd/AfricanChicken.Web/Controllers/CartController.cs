@@ -100,10 +100,32 @@ namespace AfricanKitchen.Web.Controllers
             }
             return View();
         }
-
+       
         public async Task<IActionResult> Checkout()
         {
             return View(await LoadCartDTOBasedOnLoggedInUser());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Checkout(CartDTO cartDTO)
+        {
+            try
+            {
+                var accessToken = await HttpContext.GetTokenAsync("access_token");
+                var response = await _cartService.Checkout<ResponseDTO>(cartDTO.CartHeader,accessToken);
+                return RedirectToAction(nameof(Confirmation));
+            }
+            catch (Exception ex)
+            {
+
+                return View(cartDTO);
+            }
+            return View(await LoadCartDTOBasedOnLoggedInUser());
+        }
+
+        public async Task<IActionResult> Confirmation()
+        {
+            return View();
         }
     }
 }

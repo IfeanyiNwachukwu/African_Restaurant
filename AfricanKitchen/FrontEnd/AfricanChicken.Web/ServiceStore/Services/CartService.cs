@@ -34,6 +34,17 @@ namespace AfricanKitchen.Web.ServiceStore.Services
             });
         }
 
+        public async Task<T> Checkout<T>(CartHeaderDTO cartHeader, string token = null)
+        {
+            return await SendAsync<T>(new ApiRequest()
+            {
+                ApiType = StaticDetails.ApiType.POST,
+                Data = cartHeader,
+                Url = StaticDetails.ShoppingCartAPIBase + "/api/cart/checkout",
+                AccessToken = token
+            });
+        }
+
         public async Task<T> GetCartByUserIdAsync<T>(string userId, string token = null)
         {
             return await SendAsync<T>(new ApiRequest()

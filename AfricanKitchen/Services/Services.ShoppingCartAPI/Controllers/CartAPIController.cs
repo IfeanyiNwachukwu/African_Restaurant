@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Services.ShoppingCartAPI.Contracts.IRepositoryManager.ShoppingCartRepositoryStore;
 using Services.ShoppingCartAPI.DataTransferObjects.Readable;
+using Services.ShoppingCartAPI.Messages;
 
 namespace Services.ShoppingCartAPI.Controllers
 {
@@ -26,8 +27,8 @@ namespace Services.ShoppingCartAPI.Controllers
             }
             catch (Exception ex)
             {
-               _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string> { ex.ToString()};
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string> { ex.ToString() };
             }
             return _response;
         }
@@ -79,13 +80,13 @@ namespace Services.ShoppingCartAPI.Controllers
             }
             return _response;
         }
-        
+
         [HttpPost("ApplyCoupon")]
         public async Task<object> ApplyCoupon([FromBody] CartDTO cartDTO)
         {
             try
             {
-                bool isSuccess = await _cartRepository.ApplyCoupon(cartDTO.CartHeader.UserId,cartDTO.CartHeader.CouponCode);
+                bool isSuccess = await _cartRepository.ApplyCoupon(cartDTO.CartHeader.UserId, cartDTO.CartHeader.CouponCode);
                 _response.Result = isSuccess;
             }
             catch (Exception ex)
@@ -109,6 +110,32 @@ namespace Services.ShoppingCartAPI.Controllers
                 _response.ErrorMessages = new List<string> { ex.ToString() };
             }
             return _response;
+        }
+        [HttpPost("Checkout")]
+        public async Task<object> checkout(CheckoutHeaderDTO checkoutHeader)
+        {
+            try
+            {
+                CartDTO cartDTO = await _cartRepository.GetCartByUserId(checkoutHeader.UserId);
+
+                if (cartDTO == null)
+                {
+                    return BadRequest();
+                }
+                checkoutHeader.CartDetails = cartDTO.CartDetails;
+
+                //logic to add message to process order
+                return null;
+
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string> { ex.ToString() };
+            }
+            return _response;
+
+
         }
     }
 }
