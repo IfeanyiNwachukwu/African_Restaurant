@@ -1,6 +1,8 @@
 
 
+using Services.CouponAPI.Contracts.CouponRepositoryStore;
 using Services.CouponAPI.Extensions;
+using Services.CouponAPI.Fulfilment.CouponRepositoryStore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddScoped<ICouponRepository, CouponRepository>();
 
 var app = builder.Build();
 

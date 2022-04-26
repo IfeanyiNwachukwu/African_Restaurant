@@ -81,11 +81,11 @@
                     </div>
                     <div class="col-6 text-end">
                         <span class="text-danger" style="font-size:21px;">  Order Total : @((Model.CartHeader.OrderTotal).ToString("c",CultureInfo.CreateSpecificCulture("en-NG"))) <br /></span>
-                           @* @if (Model.CartHeader.DiscountTotal > 0)
+                            @if (Model.CartHeader.DiscountTotal > 0)
                             {
-                                <span class="text-success"> Order Discount :  @string.Format("{0:c}", Model.CartHeader.DiscountTotal)</span>
+                                <span class="text-success"> Order Discount : @((Model.CartHeader.DiscountTotal).ToString("c",CultureInfo.CreateSpecificCulture("en-NG")))</span>
 
-                            }*@
+                            }
                     </div>
                 </div>
             </div>

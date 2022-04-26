@@ -17,7 +17,7 @@ namespace Services.CouponAPI.Fulfilment.CouponRepositoryStore
         }
         public async Task<CouponDTO> GetCouponByCode(string couponCode)
         {
-            var couponFromDb = _db.Coupons.FirstOrDefaultAsync(x => x.CouponCode == couponCode);
+            var couponFromDb =await _db.Coupons.FirstOrDefaultAsync(x => x.CouponCode == couponCode);
 
             return _mapper.Map<CouponDTO>(couponFromDb);
         }

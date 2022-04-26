@@ -9,6 +9,7 @@ namespace Services.CouponAPI.Helpers
         public MappingProfile()
         {
             CreateMap<CouponDTO, Coupon>().ReverseMap();
+            CreateMap<Coupon,CouponDTO>().ReverseMap();
         }
     }
 }

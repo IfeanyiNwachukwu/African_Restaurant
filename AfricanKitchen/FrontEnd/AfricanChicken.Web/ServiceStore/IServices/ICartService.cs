@@ -8,5 +8,7 @@ namespace AfricanKitchen.Web.ServiceStore.IServices
         Task<T> AddToCartAsync<T>(CartDTO model, string token = null);
         Task<T> UpdateCartAsync<T>(CartDTO model, string token = null);
         Task<T> RemoveFromCartAsync<T>(int cartId, string token = null);
+        Task<T> ApplyCoupon<T>(CartDTO cartDTO, string token = null);
+        Task<T> RemoveCoupon<T>(string userId, string token = null);
     }
 }
