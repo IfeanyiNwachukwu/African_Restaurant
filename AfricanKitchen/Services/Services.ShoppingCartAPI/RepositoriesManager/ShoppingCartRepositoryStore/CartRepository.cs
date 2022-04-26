@@ -17,6 +17,24 @@ namespace Services.ShoppingCartAPI.RepositoriesManager.ShoppingCartRepositorySto
             _db = db;
             _mapper = mapper;
         }
+
+        public async Task<bool> ApplyCoupon(string userId, string couponCode)
+        {
+            var cartFromDb = await _db.CartHeaders.FirstOrDefaultAsync(u => u.UserId == userId);
+            cartFromDb.CouponCode = couponCode;
+            _db.CartHeaders.Update(cartFromDb);
+            await _db.SaveChangesAsync();
+            return true;
+            
+        }
+        public async Task<bool> RemoveCoupon(string userId)
+        {
+            var cartFromDb = await _db.CartHeaders.FirstOrDefaultAsync(u => u.UserId == userId);
+            cartFromDb.CouponCode = "";
+            _db.CartHeaders.Update(cartFromDb);
+            await _db.SaveChangesAsync();
+            return true;
+        }
         public async Task<bool> ClearCart(string UserId)
         {
             var cartHeaderFromDb = _db.CartHeaders.FirstOrDefault(x => x.UserId == UserId);
@@ -98,6 +116,7 @@ namespace Services.ShoppingCartAPI.RepositoriesManager.ShoppingCartRepositorySto
 
             return _mapper.Map<CartDTO>(cart);
         }
+
 
         public async Task<bool> RemoveFromCart(int cartDetailsId)
         {

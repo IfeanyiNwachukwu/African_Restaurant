@@ -1,12 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Services.ShoppingCartAPI.Contracts.IRepositoryManager.ShoppingCartRepositoryStore;
-using Services.ShoppingCartAPI.DbContexts;
-using Services.ShoppingCartAPI.Models;
-
-namespace Services.ShoppingCartAPI.RepositoriesManager.ShoppingCartRepositoryStore
+﻿namespace Services.ShoppingCartAPI.RepositoriesManager.ShoppingCartRepositoryStore
 {
-    public class CartHeaderRepository  
+    public class CartHeaderRepository
     {
-      
+
     }
 }
