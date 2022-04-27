@@ -13,8 +13,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.ConfigureSwaggerGen();
 builder.Services.ConfigureSqlContext(builder.Configuration);
+builder.Services.ConfigureAuthentication();
+builder.Services.ConfigureAuthorization();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
