@@ -1,8 +1,9 @@
-﻿using Services.ShoppingCartAPI.DataTransferObjects.Readable;
+﻿using Integration.MessageBus.Utility;
+using Services.ShoppingCartAPI.DataTransferObjects.Readable;
 
 namespace Services.ShoppingCartAPI.Messages
 {
-    public class CheckoutHeaderDTO
+    public class CheckoutHeaderDTO : BaseMessage
     {
         public int CartHeaderId { get; set; }
         public string UserId { get; set; }

@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Integration.MessageBus.Contracts;
+using Microsoft.AspNetCore.Mvc;
 using Services.ShoppingCartAPI.Contracts.IRepositoryManager.ShoppingCartRepositoryStore;
 using Services.ShoppingCartAPI.DataTransferObjects.Readable;
+using Services.ShoppingCartAPI.Helpers;
 using Services.ShoppingCartAPI.Messages;
 
 namespace Services.ShoppingCartAPI.Controllers
@@ -10,11 +12,13 @@ namespace Services.ShoppingCartAPI.Controllers
     public class CartAPIController : Controller
     {
         private readonly ICartRepository _cartRepository;
+        private readonly IMessageBus _messageBus;
         protected ResponseDTO _response;
 
-        public CartAPIController(ICartRepository cartRepository)
+        public CartAPIController(ICartRepository cartRepository, IMessageBus messageBus)
         {
             _cartRepository = cartRepository;
+            _messageBus = messageBus;
             _response = new ResponseDTO();
         }
         [HttpGet("GetCart/{userId}")]
@@ -125,7 +129,7 @@ namespace Services.ShoppingCartAPI.Controllers
                 checkoutHeader.CartDetails = cartDTO.CartDetails;
 
                 //logic to add message to process order
-                return null;
+                await _messageBus.PublishMessage(checkoutHeader, StaticDetails.CheckoutTopic);
 
             }
             catch (Exception ex)
