@@ -1,17 +1,18 @@
 ﻿using Azure.Messaging.ServiceBus;
 using Newtonsoft.Json;
+using Services.OrderAPI.Contracts.Messaging;
 using Services.OrderAPI.Fulfilment.OrderRepositoryStore;
 using Services.OrderAPI.Messages;
 using Services.OrderAPI.Models;
 using System.Text;
 
 
-namespace Services.OrderAPI.Messaging
+namespace Services.OrderAPI.Fulfilment.Messaging
 {
-    public class AzureServiceBusConsumer
+    public class AzureServiceBusConsumer : IAzureServiceBusConsumer
     {
         private readonly string serviceBusConnectionString;
-        private readonly string subscriptionName;
+        private readonly string subscriptionNameCheckOut;
         private readonly string checkoutMessageTopic;
         private readonly OrderRepository _orderRepository;
 
@@ -19,16 +20,41 @@ namespace Services.OrderAPI.Messaging
 
         private readonly IConfiguration _configuration;
 
-        public AzureServiceBusConsumer(OrderRepository orderRepository,IConfiguration configuration)
+        public AzureServiceBusConsumer(OrderRepository orderRepository, IConfiguration configuration)
         {
             _orderRepository = orderRepository;
             _configuration = configuration;
 
             serviceBusConnectionString = _configuration.GetValue<string>("ServiceBusConnectionString");
-            subscriptionName = _configuration.GetValue<string>("checkoutmessagetopic");
+            subscriptionNameCheckOut = _configuration.GetValue<string>("checkoutmessagetopic");
             checkoutMessageTopic = _configuration.GetValue<string>("AfricanKitchenOrderSubscription");
+
+            var client = new ServiceBusClient(serviceBusConnectionString);
+
+            checkOutProcessor = client.CreateProcessor(checkoutMessageTopic, subscriptionNameCheckOut);
         }
-        private async Task OnCheckOutMessageReceived(ProcessMessageEventArgs args) 
+
+        public async Task Start()
+        {
+            checkOutProcessor.ProcessMessageAsync += OnCheckOutMessageReceived;
+            checkOutProcessor.ProcessErrorAsync += ErrorHandler;
+
+            await checkOutProcessor.StartProcessingAsync();
+        }
+
+        public async Task Stop()
+        {
+            await checkOutProcessor.StartProcessingAsync();
+            await checkOutProcessor.DisposeAsync();
+        }
+
+        Task ErrorHandler(ProcessErrorEventArgs args)
+        {
+            Console.WriteLine(args.Exception.ToString());
+            return Task.CompletedTask;
+        }
+
+        private async Task OnCheckOutMessageReceived(ProcessMessageEventArgs args)
         {
             var message = args.Message;
             var body = Encoding.UTF8.GetString(message.Body);
@@ -53,7 +79,7 @@ namespace Services.OrderAPI.Messaging
                 Phone = checkoutHeaderDTO.Phone,
                 PickupDateTime = checkoutHeaderDTO.PickupDateTime,
             };
-            foreach(var detailList in checkoutHeaderDTO.CartDetails)
+            foreach (var detailList in checkoutHeaderDTO.CartDetails)
             {
                 OrderDetails orderDetails = new()
                 {
@@ -67,7 +93,7 @@ namespace Services.OrderAPI.Messaging
             }
 
             await _orderRepository.AddOrder(orderHeader);
-           
+
         }
     }
 }

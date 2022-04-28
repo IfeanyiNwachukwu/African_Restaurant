@@ -1,6 +1,6 @@
-using Services.OrderAPI.Contracts.IOrderRepositoryStore;
+using Services.OrderAPI.Contracts.Messaging;
 using Services.OrderAPI.Extensions;
-using Services.OrderAPI.Fulfilment.OrderRepositoryStore;
+using Services.OrderAPI.Fulfilment.Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +16,7 @@ builder.Services.ConfigureAuthentication();
 builder.Services.ConfigureAuthorization();
 //builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.ConfigureSingletonOrderRepository(builder.Configuration);
+builder.Services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
 
 var app = builder.Build();
 
@@ -31,5 +32,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UseServiceBusConsumer();
 app.Run();
