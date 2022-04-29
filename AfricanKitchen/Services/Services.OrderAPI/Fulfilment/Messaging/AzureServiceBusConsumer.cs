@@ -26,15 +26,15 @@ namespace Services.OrderAPI.Fulfilment.Messaging
             _configuration = configuration;
 
             serviceBusConnectionString = _configuration.GetValue<string>("ServiceBusConnectionString");
-            subscriptionNameCheckOut = _configuration.GetValue<string>("checkoutmessagetopic");
-            checkoutMessageTopic = _configuration.GetValue<string>("AfricanKitchenOrderSubscription");
+            subscriptionNameCheckOut = _configuration.GetValue<string>("SubscriptionNameCheckOut");
+            checkoutMessageTopic = _configuration.GetValue<string>("CheckoutMessageTopic");
 
             var client = new ServiceBusClient(serviceBusConnectionString);
 
             checkOutProcessor = client.CreateProcessor(checkoutMessageTopic, subscriptionNameCheckOut);
         }
 
-        public async Task Start()
+        public async Task Start() 
         {
             checkOutProcessor.ProcessMessageAsync += OnCheckOutMessageReceived;
             checkOutProcessor.ProcessErrorAsync += ErrorHandler;

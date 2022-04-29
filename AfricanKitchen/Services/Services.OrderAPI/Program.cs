@@ -18,6 +18,9 @@ builder.Services.ConfigureAuthorization();
 builder.Services.ConfigureSingletonOrderRepository(builder.Configuration);
 builder.Services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
 
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -33,4 +36,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.UseServiceBusConsumer();
+
 app.Run();
+

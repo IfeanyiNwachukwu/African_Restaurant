@@ -12,7 +12,7 @@ namespace Services.OrderAPI.Extensions
             var hostApplicationLife = app.ApplicationServices.GetService<IHostApplicationLifetime>();
 
             hostApplicationLife.ApplicationStarted.Register(OnStart);
-            hostApplicationLife.ApplicationStarted.Register(OnStop);
+            hostApplicationLife.ApplicationStopped.Register(OnStop);
             return app;
         }
         private static void OnStart() => ServiceBusConsumer.Start();
