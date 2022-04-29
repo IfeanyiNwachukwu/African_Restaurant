@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Services.ShoppingCartAPI.ContractFulfilment.RepositoriesManager.CouponRepositoryStore;
+using Services.ShoppingCartAPI.Contracts.IRepositoryManager.CouponRepositoryStore;
 using Services.ShoppingCartAPI.DbContexts;
 
 namespace Services.ShoppingCartAPI.Extensions
@@ -63,5 +65,10 @@ namespace Services.ShoppingCartAPI.Extensions
 
                 });
              });
+        public static void ConfigureHttpClient(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddHttpClient<ICouponRepository, CouponRepository>(u =>
+             u.BaseAddress = new Uri(configuration["ServiceUrls:CouponAPI"]));
+        }
     }
 }

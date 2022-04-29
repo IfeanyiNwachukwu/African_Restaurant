@@ -1,5 +1,6 @@
 ﻿using Integration.MessageBus.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using Services.ShoppingCartAPI.Contracts.IRepositoryManager.CouponRepositoryStore;
 using Services.ShoppingCartAPI.Contracts.IRepositoryManager.ShoppingCartRepositoryStore;
 using Services.ShoppingCartAPI.DataTransferObjects.Readable;
 using Services.ShoppingCartAPI.Helpers;
@@ -12,12 +13,14 @@ namespace Services.ShoppingCartAPI.Controllers
     public class CartAPIController : Controller
     {
         private readonly ICartRepository _cartRepository;
+        private readonly ICouponRepository _couponRepository;
         private readonly IMessageBus _messageBus;
         protected ResponseDTO _response;
 
-        public CartAPIController(ICartRepository cartRepository, IMessageBus messageBus)
+        public CartAPIController(ICartRepository cartRepository, IMessageBus messageBus,ICouponRepository couponRepository)
         {
             _cartRepository = cartRepository;
+            _couponRepository = couponRepository;
             _messageBus = messageBus;
             _response = new ResponseDTO();
         }
@@ -125,6 +128,18 @@ namespace Services.ShoppingCartAPI.Controllers
                 if (cartDTO == null)
                 {
                     return BadRequest();
+                }
+                if (!string.IsNullOrEmpty(checkoutHeader.CouponCode))
+                {
+                    CouponDTO coupon = await _couponRepository.GetCoupon(checkoutHeader.CouponCode);
+                    if(checkoutHeader.DiscountTotal != coupon.DiscountAmount)
+                    {
+                       
+                        _response.IsSuccess = false;
+                        _response.ErrorMessages = new List<string>() { "Coupon Price has changed, please confrim" };
+                        _response.DisplayMessage = "Coupon Price has changed, please confirm";
+                        return _response;
+                    }
                 }
                 checkoutHeader.CartDetails = cartDTO.CartDetails;
 

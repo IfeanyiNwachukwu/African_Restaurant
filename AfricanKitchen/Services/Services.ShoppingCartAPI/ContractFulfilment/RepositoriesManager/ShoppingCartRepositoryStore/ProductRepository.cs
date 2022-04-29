@@ -4,10 +4,10 @@ using Services.ShoppingCartAPI.Contracts.IRepositoryManager.ShoppingCartReposito
 using Services.ShoppingCartAPI.DbContexts;
 using Services.ShoppingCartAPI.Models;
 
-namespace Services.ShoppingCartAPI.RepositoriesManager.ShoppingCartRepositoryStore
+namespace Services.ShoppingCartAPI.ContractFulfilment.RepositoriesManager.ShoppingCartRepositoryStore
 {
-    public class ProductRepository 
+    public class ProductRepository
     {
-       
+
     }
 }

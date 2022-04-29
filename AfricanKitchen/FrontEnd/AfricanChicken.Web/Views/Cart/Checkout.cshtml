@@ -1,7 +1,8 @@
 ﻿@using System.Globalization
 @model AfricanKitchen.Web.Models.CartDTO
 
-@if (TempData["Error"] != null) { 
+@if (TempData["Error"] != null) 
+{ 
     <div class="alert alert-warning" role="alert">@TempData["Error"]</div>
 }
 
@@ -87,7 +88,7 @@
                                 </div>
 
                                 <div class="col-3" style="font-size:11px;">
-                                    <span style="font-size:17px;">@((cartObj.Product.Price).ToString("c",CultureInfo.CreateSpecificCulture("en-NG")))</span>
+                                    <span style="font-size:17px;"> @((cartObj.Product.Price).ToString("c",CultureInfo.CreateSpecificCulture("en-NG")))</span>
 
                                 </div>
                                 <div class="col-3" style="font-size:11px;">
@@ -101,7 +102,7 @@
                                     Order Total :   @((Model.CartHeader.OrderTotal).ToString("c",CultureInfo.CreateSpecificCulture("en-NG"))) <br />
                                     @if (Model.CartHeader.DiscountTotal > 0)
                                     {
-                                        <span class="text-success"> Order Discount :   @((Model.CartHeader.DiscountTotal).ToString("c",CultureInfo.CreateSpecificCulture("en-NG")))</span>
+                                        <span class="text-success"> Order Discount :  @(( Model.CartHeader.DiscountTotal).ToString("c",CultureInfo.CreateSpecificCulture("en-NG"))) </span>
                                     }
                                 </div>
                             </div>
@@ -122,7 +123,6 @@
             </div>
         </div>
     </form>
-   
 }
 
 @section Scripts{

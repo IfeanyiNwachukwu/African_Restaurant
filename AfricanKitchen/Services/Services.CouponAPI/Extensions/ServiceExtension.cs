@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Services.CouponAPI.Contracts.CouponRepositoryStore;
 using Services.CouponAPI.DbContexts;
+using Services.CouponAPI.Fulfilment.CouponRepositoryStore;
 
 namespace Services.CouponAPI.Extensions
 {
@@ -63,5 +65,7 @@ namespace Services.CouponAPI.Extensions
 
                 });
              });
+
+       
     }
 }

@@ -5,7 +5,7 @@ using Services.ShoppingCartAPI.DataTransferObjects.Readable;
 using Services.ShoppingCartAPI.DbContexts;
 using Services.ShoppingCartAPI.Models;
 
-namespace Services.ShoppingCartAPI.RepositoriesManager.ShoppingCartRepositoryStore
+namespace Services.ShoppingCartAPI.ContractFulfilment.RepositoriesManager.ShoppingCartRepositoryStore
 {
     public class CartRepository : ICartRepository
     {
@@ -25,7 +25,7 @@ namespace Services.ShoppingCartAPI.RepositoriesManager.ShoppingCartRepositorySto
             _db.CartHeaders.Update(cartFromDb);
             await _db.SaveChangesAsync();
             return true;
-            
+
         }
         public async Task<bool> RemoveCoupon(string userId)
         {
@@ -38,7 +38,7 @@ namespace Services.ShoppingCartAPI.RepositoriesManager.ShoppingCartRepositorySto
         public async Task<bool> ClearCart(string UserId)
         {
             var cartHeaderFromDb = _db.CartHeaders.FirstOrDefault(x => x.UserId == UserId);
-            if(cartHeaderFromDb != null)
+            if (cartHeaderFromDb != null)
             {
                 _db.CartDetails.RemoveRange(_db.CartDetails.Where(u => u.CartHeaderId == cartHeaderFromDb.CartHeaderId));
                 _db.CartHeaders.Remove(cartHeaderFromDb);
